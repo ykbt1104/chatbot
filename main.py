@@ -1,3 +1,17 @@
+# ===== Cloud/ローカル両対応のAPIキー読込 =====
+import os
+import streamlit as st
+from dotenv import load_dotenv
+
+load_dotenv()  # ローカル用 .env を読む（Cloudでは無視されてもOK）
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
+if not OPENAI_API_KEY:
+    st.error("OPENAI_API_KEY が設定されていません（Secrets または .env）")
+    st.stop()
+# ============================================
+
+
 """
 このファイルは、Webアプリのメイン処理が記述されたファイルです。
 """
